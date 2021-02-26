@@ -1,27 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import usePhotoListResponse from "./../hooks/usePhotoListResponse";
 import PhotoList from "./../components/PhotoList";
+import PhotoContext from "../context/PhotoContext";
 
 const PhotoListScreen = ({ navigation }) => {
-  const [
-    photoListApi,
-    photoList,
-    errorMessage,
-    loading,
-  ] = usePhotoListResponse();
+  const [photoListApi, errorMessage, loading] = usePhotoListResponse();
 
   const onItemClicked = (item) => {
     navigation.navigate("PhotoDetails", { item });
   };
 
+  const { data } = useContext(PhotoContext);
+
   return (
     <View>
-      <Text>Total photos loaded: {photoList.length}</Text>
+      <Text>Total photos loaded: {data.length}</Text>
       {errorMessage ? <Text>{errorMessage}</Text> : null}
       {loading ? <Text>Loading next page</Text> : null}
       <PhotoList
-        photoList={photoList}
+        photoList={data}
         onLoadNextPage={() => {
           photoListApi();
         }}

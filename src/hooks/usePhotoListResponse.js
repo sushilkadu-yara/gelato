@@ -1,13 +1,17 @@
+import { useContext } from "react";
 import { useEffect, useState } from "react";
+import PhotoContext from "../context/PhotoContext";
 import picsum from "./../api/picsum";
 
 const LIMIT = 50;
 let page = 1;
 
 export default () => {
-  const [photoList, setPhotoList] = useState([]);
+  // const [photoList, setPhotoList] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { updatePhotoList } = useContext(PhotoContext);
 
   const photoListApi = async () => {
     if (loading) return;
@@ -20,8 +24,7 @@ export default () => {
         },
       });
 
-      const finalList = [...photoList, ...response.data];
-      setPhotoList(finalList);
+      updatePhotoList(response.data);
       page++;
     } catch (err) {
       console.log("Error loading photos: ", err);
@@ -35,5 +38,5 @@ export default () => {
     photoListApi();
   }, []);
 
-  return [photoListApi, photoList, errorMessage, loading];
+  return [photoListApi, errorMessage, loading];
 };
