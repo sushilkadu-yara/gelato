@@ -1,12 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
-import ProgressiveImage from "./ProgressiveImage";
-import ImageLoad from "react-native-image-placeholder";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
+import ImageItem from "./ImageItem";
 
 const ITEM_VISIBILITY_THRESHOLD = 25;
 
-const PhotoList = ({ photoList, onLoadNextPage }) => {
-  let lastVisibileItem = 0;
+const PhotoList = ({ photoList, onLoadNextPage, loading }) => {
   const onViewRef = React.useRef(({ changed }) => {
     const { index } = changed[changed.length - 1];
   });
@@ -16,22 +20,17 @@ const PhotoList = ({ photoList, onLoadNextPage }) => {
     <View>
       <FlatList
         data={photoList}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => {
+          // console.log("ITEM: ", item);
+          return item.id;
+        }}
         renderItem={({ item }) => {
           return (
-            <View
-              style={{
-                flex: 1,
-                flexDirection: "column",
-                margin: 1,
-              }}
-            >
-              <ImageLoad
-                key={item.id}
-                style={styles.imageThumbnail}
-                source={{ uri: item.download_url }}
-              />
-            </View>
+            <ImageItem
+              key={item.id}
+              imageStyle={styles.imageThumbnail}
+              source={{ uri: item.download_url }}
+            />
           );
         }}
         numColumns={3}
