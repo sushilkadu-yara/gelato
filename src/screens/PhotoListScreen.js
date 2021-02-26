@@ -12,7 +12,7 @@ const PhotoListScreen = ({ navigation }) => {
   ] = usePhotoListResponse();
 
   const onItemClicked = (item) => {
-    console.log("Clicked on: ", item);
+    navigation.navigate("PhotoDetails", { item });
   };
 
   return (
