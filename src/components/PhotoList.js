@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import ProgressiveImage from "./ProgressiveImage";
 
 const PhotoList = ({ photoList }) => {
   return (
@@ -17,13 +18,14 @@ const PhotoList = ({ photoList }) => {
               }}
             >
               <Image
+                key={item.id}
                 style={styles.imageThumbnail}
                 source={{ uri: item.download_url }}
               />
             </View>
           );
         }}
-        numColumns={2}
+        numColumns={3}
       />
     </View>
   );
