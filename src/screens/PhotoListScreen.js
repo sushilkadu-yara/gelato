@@ -13,7 +13,10 @@ const PhotoListScreen = () => {
 
       {errorMessage ? <Text>{errorMessage}</Text> : null}
 
-      <PhotoList photoList={photoList} />
+      <PhotoList
+        photoList={photoList}
+        onLoadNextPage={() => console.log("Load next page")}
+      />
     </View>
   );
 };

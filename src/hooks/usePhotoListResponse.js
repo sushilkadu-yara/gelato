@@ -9,14 +9,15 @@ export default () => {
     try {
       const response = await picsum.get("/list", {
         params: {
-          page: 3,
+          page: 1,
           limit: 100,
         },
       });
       setPhotoList(response.data);
     } catch (err) {
-      console.log(err);
+      console.log("Error loading photos: ", err);
       setErrorMessage("Failed to get photoList");
+    } finally {
     }
   };
 

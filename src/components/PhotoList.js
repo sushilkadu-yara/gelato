@@ -1,8 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 import ProgressiveImage from "./ProgressiveImage";
+import ImageLoad from "react-native-image-placeholder";
 
-const PhotoList = ({ photoList }) => {
+const ITEM_VISIBILITY_THRESHOLD = 25;
+
+const PhotoList = ({ photoList, onLoadNextPage }) => {
+  let lastVisibileItem = 0;
+  const onViewRef = React.useRef(({ changed }) => {
+    const { index } = changed[changed.length - 1];
+  });
+  const viewConfigRef = React.useRef({ itemVisiblePercentThreshold: 80 });
+
   return (
     <View>
       <FlatList
@@ -17,7 +26,7 @@ const PhotoList = ({ photoList }) => {
                 margin: 1,
               }}
             >
-              <Image
+              <ImageLoad
                 key={item.id}
                 style={styles.imageThumbnail}
                 source={{ uri: item.download_url }}
@@ -26,6 +35,9 @@ const PhotoList = ({ photoList }) => {
           );
         }}
         numColumns={3}
+        onViewableItemsChanged={onViewRef.current}
+        viewabilityConfig={viewConfigRef.current}
+        onEndReached={() => onLoadNextPage()}
       />
     </View>
   );
