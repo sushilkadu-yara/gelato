@@ -13,7 +13,7 @@ const PhotoListScreen = () => {
 
       {errorMessage ? <Text>{errorMessage}</Text> : null}
 
-      <PhotoList />
+      <PhotoList photoList={photoList} />
     </View>
   );
 };
