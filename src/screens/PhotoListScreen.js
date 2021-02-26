@@ -1,15 +1,9 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import usePhotoListResponse from "./../hooks/usePhotoListResponse";
 import PhotoList from "./../components/PhotoList";
 
-const PhotoListScreen = () => {
+const PhotoListScreen = ({ navigation }) => {
   const [
     photoListApi,
     photoList,
@@ -17,18 +11,22 @@ const PhotoListScreen = () => {
     loading,
   ] = usePhotoListResponse();
 
+  const onItemClicked = (item) => {
+    console.log("Clicked on: ", item);
+  };
+
   return (
     <View>
       <Text>Total photos loaded: {photoList.length}</Text>
       {errorMessage ? <Text>{errorMessage}</Text> : null}
-
+      {loading ? <Text>Loading next page</Text> : null}
       <PhotoList
         photoList={photoList}
         onLoadNextPage={() => {
-          console.log("Load next page");
           photoListApi();
         }}
         loading={loading}
+        onItemClicked={onItemClicked}
       />
     </View>
   );

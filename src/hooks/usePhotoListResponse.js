@@ -12,7 +12,6 @@ export default () => {
   const photoListApi = async () => {
     if (loading) return;
     setLoading(true);
-    console.log("PAGE: ", page);
     try {
       const response = await picsum.get("/list", {
         params: {

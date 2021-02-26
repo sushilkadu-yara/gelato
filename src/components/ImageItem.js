@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableHighlight } from "react-native";
 import ImageLoad from "react-native-image-placeholder";
 
 const ImageItem = ({ id, source, imageStyle }) => {
@@ -13,7 +13,6 @@ const ImageItem = ({ id, source, imageStyle }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column",
     margin: 1,
   },
 });

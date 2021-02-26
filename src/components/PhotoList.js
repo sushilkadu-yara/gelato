@@ -5,33 +5,48 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  TouchableHighlight,
 } from "react-native";
 import ImageItem from "./ImageItem";
 
 const ITEM_VISIBILITY_THRESHOLD = 25;
 
-const PhotoList = ({ photoList, onLoadNextPage, loading }) => {
+const PhotoList = ({ photoList, onLoadNextPage, loading, onItemClicked }) => {
   const onViewRef = React.useRef(({ changed }) => {
     const { index } = changed[changed.length - 1];
   });
   const viewConfigRef = React.useRef({ itemVisiblePercentThreshold: 80 });
+
+  /**
+   * Function to render individual item
+   * @param {Data to be rendered} item
+   */
+  const renderItem = (item) => {
+    return (
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => onItemClicked(item)}
+      >
+        <ImageItem
+          key={item.id}
+          imageStyle={styles.imageThumbnail}
+          source={{ uri: item.download_url }}
+        />
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <View>
       <FlatList
         data={photoList}
         keyExtractor={(item) => {
-          // console.log("ITEM: ", item);
           return item.id;
         }}
         renderItem={({ item }) => {
-          return (
-            <ImageItem
-              key={item.id}
-              imageStyle={styles.imageThumbnail}
-              source={{ uri: item.download_url }}
-            />
-          );
+          return renderItem(item);
         }}
         numColumns={3}
         onViewableItemsChanged={onViewRef.current}
@@ -43,6 +58,7 @@ const PhotoList = ({ photoList, onLoadNextPage, loading }) => {
 };
 
 const styles = StyleSheet.create({
+  container: { flex: 1 },
   imageThumbnail: {
     justifyContent: "center",
     alignItems: "center",
