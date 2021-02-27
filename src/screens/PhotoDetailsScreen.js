@@ -1,16 +1,11 @@
 import React, { useContext } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { ViewPager } from "react-native-viewpager-carousel";
 import { Context } from "../context/PhotoContext";
+import { Feather } from "react-native-vector-icons";
 
-const PhotoDetailsScreen = (props) => {
-  const {
-    navigation: {
-      state: {
-        params: { item },
-      },
-    },
-  } = props;
+const PhotoDetailsScreen = ({ navigation }) => {
+  const item = navigation.getParam("item");
 
   const { state } = useContext(Context);
 
@@ -34,6 +29,22 @@ const PhotoDetailsScreen = (props) => {
   );
 };
 
+PhotoDetailsScreen.navigationOptions = () => {
+  return {
+    headerRight: () => (
+      <View style={styles.iconContainer}>
+        <TouchableOpacity onPress={() => console.log("Save clicked")}>
+          <Feather name="save" size={30} style={styles.saveIconStyle} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => console.log("Share clicked")}>
+          <Feather name="share-2" size={30} style={styles.saveIconStyle} />
+        </TouchableOpacity>
+      </View>
+    ),
+  };
+};
+
 const styles = StyleSheet.create({
   viewPagerStyle: {
     flex: 1,
@@ -45,6 +56,17 @@ const styles = StyleSheet.create({
   imageStyle: {
     flex: 1,
     resizeMode: "contain",
+  },
+
+  iconContainer: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  saveIconStyle: {
+    paddingRight: 10,
+    alignSelf: "center",
   },
 });
 
