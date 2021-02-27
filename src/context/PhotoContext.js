@@ -1,7 +1,4 @@
-import React, { useReducer } from "react";
-import { useState } from "react";
-
-const PhotoContext = React.createContext();
+import createDataContext from "./createDataContext";
 
 const photoReducer = (state, action) => {
   switch (action.type) {
@@ -13,18 +10,14 @@ const photoReducer = (state, action) => {
   }
 };
 
-export const PhotoProvider = ({ children }) => {
-  const [photoList, dispatch] = useReducer(photoReducer, []);
-
-  const updatePhotoList = (newPhotoList) => {
+const updatePhotoList = (dispatch) => {
+  return (newPhotoList) => {
     dispatch({ type: "PHOTO_LIST_LOADED", payload: newPhotoList });
   };
-
-  return (
-    <PhotoContext.Provider value={{ data: photoList, updatePhotoList }}>
-      {children}
-    </PhotoContext.Provider>
-  );
 };
 
-export default PhotoContext;
+export const { Context, Provider } = createDataContext(
+  photoReducer,
+  { updatePhotoList },
+  []
+);

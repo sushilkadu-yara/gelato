@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useEffect, useState } from "react";
-import PhotoContext from "../context/PhotoContext";
+import { Context } from "../context/PhotoContext";
 import picsum from "./../api/picsum";
 
 const LIMIT = 50;
@@ -11,7 +11,7 @@ export default () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { updatePhotoList } = useContext(PhotoContext);
+  const { updatePhotoList } = useContext(Context);
 
   const photoListApi = async () => {
     if (loading) return;

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { ViewPager } from "react-native-viewpager-carousel";
-import PhotoContext from "../context/PhotoContext";
+import { Context } from "../context/PhotoContext";
 
 const PhotoDetailsScreen = (props) => {
   const {
@@ -12,9 +12,7 @@ const PhotoDetailsScreen = (props) => {
     },
   } = props;
 
-  const { data } = useContext(PhotoContext);
-
-  // console.log("DATA: ", data);
+  const { state } = useContext(Context);
 
   const renderPage = ({ data }) => {
     return (
@@ -27,7 +25,7 @@ const PhotoDetailsScreen = (props) => {
   return (
     <ViewPager
       containerStyle={styles.viewPagerStyle}
-      data={data}
+      data={state}
       renderPage={renderPage}
       initialPage={item}
       lazyrender
