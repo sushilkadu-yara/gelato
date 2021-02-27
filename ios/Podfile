@@ -23,4 +23,6 @@ target 'gelato' do
   #  end
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
+  pod 'RNShare', :path => '../node_modules/react-native-share'
+
 end
