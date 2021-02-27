@@ -32,7 +32,6 @@ const PhotoDetailsScreen = ({ navigation }) => {
 };
 
 const shareImage = async ({ navigation }) => {
-  console.log("Inside shareImage");
   try {
     const item = navigation.getParam("item");
     const data = await getFileData(item.download_url);
