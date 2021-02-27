@@ -32,7 +32,7 @@ const PhotoList = ({ photoList, onLoadNextPage, loading, onItemClicked }) => {
         <ImageItem
           key={item.id}
           imageStyle={styles.imageThumbnail}
-          source={{ uri: item.download_url }}
+          source={{ uri: item.source.uri }}
         />
       </TouchableOpacity>
     );

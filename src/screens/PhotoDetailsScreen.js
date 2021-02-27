@@ -6,28 +6,34 @@ import { Feather } from "react-native-vector-icons";
 import Share from "react-native-share";
 import { getFileData } from "./../api/picsum";
 import { saveImage } from "./../utils/AppUtils";
+import Gallery from "react-native-image-gallery";
 
 const PhotoDetailsScreen = ({ navigation }) => {
   const item = navigation.getParam("item");
 
+  console.log("ITEM: ", item);
   const { state } = useContext(Context);
+  const index = state.indexOf(item);
+
+  console.log("Index: ", index);
 
   const renderPage = ({ data }) => {
     return (
       <View style={styles.container}>
-        <Image style={styles.imageStyle} source={{ uri: data.download_url }} />
+        <Image
+          style={styles.imageStyle}
+          source={{ uri: data.source.uri }}
+          initialPage={index}
+        />
       </View>
     );
   };
 
   return (
-    <ViewPager
-      containerStyle={styles.viewPagerStyle}
-      data={state}
-      renderPage={renderPage}
-      initialPage={item}
-      lazyrender
-      lazyrenderThreshold={2}
+    <Gallery
+      style={{ flex: 1, backgroundColor: "black" }}
+      images={state}
+      initialPage={index}
     />
   );
 };
@@ -35,7 +41,7 @@ const PhotoDetailsScreen = ({ navigation }) => {
 const shareImage = async ({ navigation }) => {
   try {
     const item = navigation.getParam("item");
-    const data = await getFileData(item.download_url);
+    const data = await getFileData(item.source.uri);
     const options = {
       title: `Sharing a photo of ${item.author}`,
       type: "image/jpeg",

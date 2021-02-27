@@ -24,7 +24,15 @@ export default () => {
         },
       });
 
-      updatePhotoList(response.data);
+      const result = response.data.map((item) => {
+        return {
+          id: item.id,
+          source: {
+            uri: item.download_url,
+          },
+        };
+      });
+      updatePhotoList(result);
       page++;
     } catch (err) {
       console.log("Error loading photos: ", err);
