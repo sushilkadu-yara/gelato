@@ -5,6 +5,7 @@ import { Context } from "../context/PhotoContext";
 import { Feather } from "react-native-vector-icons";
 import Share from "react-native-share";
 import { getFileData } from "./../api/picsum";
+import { saveImage } from "./../utils/AppUtils";
 
 const PhotoDetailsScreen = ({ navigation }) => {
   const item = navigation.getParam("item");
@@ -50,7 +51,13 @@ PhotoDetailsScreen.navigationOptions = (props) => {
   return {
     headerRight: () => (
       <View style={styles.iconContainer}>
-        <TouchableOpacity onPress={() => console.log("Save clicked")}>
+        <TouchableOpacity
+          onPress={async () => {
+            console.log("Saving image to galley");
+            const item = props.navigation.getParam("item");
+            await saveImage(item.download_url);
+          }}
+        >
           <Feather name="save" size={30} style={styles.saveIconStyle} />
         </TouchableOpacity>
 
