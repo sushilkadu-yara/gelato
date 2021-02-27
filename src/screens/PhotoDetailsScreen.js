@@ -3,6 +3,8 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { ViewPager } from "react-native-viewpager-carousel";
 import { Context } from "../context/PhotoContext";
 import { Feather } from "react-native-vector-icons";
+import Share from "react-native-share";
+import { getFileData } from "./../api/picsum";
 
 const PhotoDetailsScreen = ({ navigation }) => {
   const item = navigation.getParam("item");
@@ -29,7 +31,23 @@ const PhotoDetailsScreen = ({ navigation }) => {
   );
 };
 
-PhotoDetailsScreen.navigationOptions = () => {
+const shareImage = async ({ navigation }) => {
+  console.log("Inside shareImage");
+  try {
+    const item = navigation.getParam("item");
+    const data = await getFileData(item.download_url);
+    const options = {
+      title: `Sharing a photo of ${item.author}`,
+      type: "image/jpeg",
+      url: data,
+    };
+    const shareResponse = await Share.open(options);
+  } catch (error) {
+    console.log("Error while sharing an image: ", error);
+  }
+};
+
+PhotoDetailsScreen.navigationOptions = (props) => {
   return {
     headerRight: () => (
       <View style={styles.iconContainer}>
@@ -37,7 +55,7 @@ PhotoDetailsScreen.navigationOptions = () => {
           <Feather name="save" size={30} style={styles.saveIconStyle} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => console.log("Share clicked")}>
+        <TouchableOpacity onPress={() => shareImage(props)}>
           <Feather name="share-2" size={30} style={styles.saveIconStyle} />
         </TouchableOpacity>
       </View>
