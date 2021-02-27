@@ -17,7 +17,6 @@ const PhotoDetailsScreen = (props) => {
   // console.log("DATA: ", data);
 
   const renderPage = ({ data }) => {
-    console.log("DATA==> ", data);
     return (
       <View style={styles.container}>
         <Image style={styles.imageStyle} source={{ uri: data.download_url }} />
