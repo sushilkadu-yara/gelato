@@ -1,7 +1,6 @@
 import { useContext } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Context } from "../context/PhotoContext";
-import picsum from "./../api/picsum";
 
 let page = 1;
 
