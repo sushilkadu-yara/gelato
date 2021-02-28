@@ -15,7 +15,7 @@ import GallerySwiper from "react-native-gallery-swiper";
 
 let item;
 
-const SWIPE_COUNT_THRESHOLD = 15;
+const SWIPE_COUNT_THRESHOLD = 25;
 
 const PhotoDetailsScreen = ({ navigation }) => {
   const incomingIndex = navigation.getParam("index");
@@ -59,8 +59,8 @@ const PhotoDetailsScreen = ({ navigation }) => {
   };
 
   const onPageSelected = (index) => {
-    console.log("onPageSelected: ", index);
     item = photoList[index];
+    console.log("Index: ", item);
   };
 
   if (photoList.length <= 0) return null;
