@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Buffer } from "buffer";
+
 export default axios.create({
   baseURL: "https://picsum.photos/v2",
   headers: {

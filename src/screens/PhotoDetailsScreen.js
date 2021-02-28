@@ -20,20 +20,22 @@ const PhotoDetailsScreen = ({ navigation }) => {
 
   const { state } = useContext(Context);
 
-  const [currentIndex, setCurrentIndex] = useState(state.indexOf(item));
+  const [currentIndex, setCurrentIndex] = useState(
+    state.photoList.indexOf(item)
+  );
 
   const showGalleryIndex = () => {
     return (
       <View style={styles.pageCounterContainerStyle}>
         <Text style={styles.pageCounterTextStyle}>
-          {currentIndex + 1} / {state.length}
+          {currentIndex + 1} / {state.photoList.length}
         </Text>
       </View>
     );
   };
 
   const onPageSelected = (index) => {
-    item = state[index];
+    item = state.photoList[index];
     setCurrentIndex(index);
   };
 
@@ -41,9 +43,9 @@ const PhotoDetailsScreen = ({ navigation }) => {
     <View style={{ flex: 1 }}>
       <GallerySwiper
         style={{ flex: 1, backgroundColor: "black" }}
-        images={state}
+        images={state.photoList}
         initialPage={currentIndex}
-        initialNumToRender={state.length}
+        initialNumToRender={state.photoList.length}
         onPageSelected={onPageSelected}
         sensitiveScroll={false}
       />

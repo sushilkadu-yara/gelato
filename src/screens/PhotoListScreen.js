@@ -5,7 +5,7 @@ import PhotoList from "./../components/PhotoList";
 import { Context } from "../context/PhotoContext";
 
 const PhotoListScreen = ({ navigation }) => {
-  const [photoListApi, errorMessage, loading] = usePhotoListResponse();
+  const [photoListApi] = usePhotoListResponse();
 
   const onItemClicked = (item) => {
     navigation.navigate("PhotoDetails", { item });
@@ -15,15 +15,15 @@ const PhotoListScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>Total photos loaded: {state.length}</Text>
-      {errorMessage ? <Text>{errorMessage}</Text> : null}
-      {loading ? <Text>Loading next page</Text> : null}
+      <Text>Total photos loaded: {state.photoList.length}</Text>
+      {state.error ? <Text>{state.error}</Text> : null}
+      {state.loading ? <Text>Loading next page</Text> : null}
       <PhotoList
-        photoList={state}
+        photoList={state.photoList}
         onLoadNextPage={() => {
           photoListApi();
         }}
-        loading={loading}
+        loading={state.loading}
         onItemClicked={onItemClicked}
       />
     </View>
