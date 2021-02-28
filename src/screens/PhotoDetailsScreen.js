@@ -8,42 +8,31 @@ import { getFileData } from "./../api/picsum";
 import { saveImage } from "./../utils/AppUtils";
 import Gallery from "react-native-image-gallery";
 
-const PhotoDetailsScreen = ({ navigation }) => {
-  const item = navigation.getParam("item");
+let item;
 
-  console.log("ITEM: ", item);
+const PhotoDetailsScreen = ({ navigation }) => {
+  item = navigation.getParam("item");
+
   const { state } = useContext(Context);
   const index = state.indexOf(item);
-
-  console.log("Index: ", index);
-
-  const renderPage = ({ data }) => {
-    return (
-      <View style={styles.container}>
-        <Image
-          style={styles.imageStyle}
-          source={{ uri: data.source.uri }}
-          initialPage={index}
-        />
-      </View>
-    );
-  };
 
   return (
     <Gallery
       style={{ flex: 1, backgroundColor: "black" }}
       images={state}
       initialPage={index}
+      onPageSelected={(event) => {
+        item = state[event];
+        console.log("Selected page: ", event);
+      }}
     />
   );
 };
 
 const shareImage = async ({ navigation }) => {
   try {
-    const item = navigation.getParam("item");
     const data = await getFileData(item.source.uri);
     const options = {
-      title: `Sharing a photo of ${item.author}`,
       type: "image/jpeg",
       url: data,
     };
@@ -60,8 +49,7 @@ PhotoDetailsScreen.navigationOptions = (props) => {
         <TouchableOpacity
           onPress={async () => {
             console.log("Saving image to galley");
-            const item = props.navigation.getParam("item");
-            await saveImage(item.download_url);
+            await saveImage(item.source.uri);
           }}
         >
           <Feather name="save" size={30} style={styles.saveIconStyle} />
