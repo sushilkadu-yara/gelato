@@ -9,6 +9,10 @@ import { saveImage } from "./../utils/AppUtils";
 import Gallery from "react-native-image-gallery";
 import { useState } from "react";
 
+// TODO remove unwanted packages
+
+import GallerySwiper from "react-native-gallery-swiper";
+
 let item;
 
 const PhotoDetailsScreen = ({ navigation }) => {
@@ -35,11 +39,13 @@ const PhotoDetailsScreen = ({ navigation }) => {
 
   return (
     <View style={{ flex: 1 }}>
-      <Gallery
+      <GallerySwiper
         style={{ flex: 1, backgroundColor: "black" }}
         images={state}
         initialPage={currentIndex}
+        initialNumToRender={state.length}
         onPageSelected={onPageSelected}
+        sensitiveScroll={false}
       />
       {showGalleryIndex()}
     </View>
@@ -48,7 +54,7 @@ const PhotoDetailsScreen = ({ navigation }) => {
 
 const shareImage = async ({ navigation }) => {
   try {
-    const data = await getFileData(item.source.uri);
+    const data = await getFileData(item.uri);
     const options = {
       type: "image/jpeg",
       url: data,
@@ -66,7 +72,7 @@ PhotoDetailsScreen.navigationOptions = (props) => {
         <TouchableOpacity
           onPress={async () => {
             console.log("Saving image to galley");
-            await saveImage(item.source.uri);
+            await saveImage(item.uri);
           }}
         >
           <Feather name="save" size={30} style={styles.saveIconStyle} />

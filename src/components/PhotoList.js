@@ -32,7 +32,7 @@ const PhotoList = ({ photoList, onLoadNextPage, loading, onItemClicked }) => {
         <ImageItem
           key={item.id}
           imageStyle={styles.imageThumbnail}
-          source={{ uri: item.source.uri }}
+          source={{ uri: item.uri }}
         />
       </TouchableOpacity>
     );
@@ -52,6 +52,7 @@ const PhotoList = ({ photoList, onLoadNextPage, loading, onItemClicked }) => {
         onViewableItemsChanged={onViewRef.current}
         viewabilityConfig={viewConfigRef.current}
         onEndReached={() => onLoadNextPage()}
+        
       />
     </View>
   );

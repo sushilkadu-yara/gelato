@@ -24,12 +24,12 @@ export default () => {
         },
       });
 
+      // Map result for rendering
       const result = response.data.map((item) => {
         return {
           id: item.id,
-          source: {
-            uri: item.download_url,
-          },
+          uri: item.download_url,
+          dimensions: { width: item.width, height: item.height },
         };
       });
       updatePhotoList(result);
