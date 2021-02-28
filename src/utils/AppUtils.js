@@ -2,6 +2,9 @@ import { PermissionsAndroid, Platform } from "react-native";
 import CameraRoll from "@react-native-community/cameraroll";
 import RNFetchBlob from "rn-fetch-blob";
 import RNFS from "react-native-fs";
+import AsyncStorage from "@react-native-community/async-storage";
+
+const SWIPE_HINT = "swipe_hint";
 
 async function hasAndroidPermission() {
   const permission = PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE;
@@ -70,4 +73,22 @@ const saveImage = async (imageUrl) => {
   }
 };
 
-export { saveImage };
+const isSwipeHintShown = async () => {
+  try {
+    const value = await AsyncStorage.getItem(SWIPE_HINT);
+    return value !== null ? JSON.parse(value) : false;
+  } catch (e) {
+    Logger.error(`Error reading ${SWIPE_HINT} key from storage`);
+    return false;
+  }
+};
+
+const setSwipeHint = async (swipeHint = true) => {
+  try {
+    await AsyncStorage.setItem(SWIPE_HINT, JSON.stringify(swipeHint));
+  } catch (e) {
+    Logger.error(`Error storing ${SWIPE_HINT} in storage`);
+  }
+};
+
+export { saveImage, isSwipeHintShown, setSwipeHint };

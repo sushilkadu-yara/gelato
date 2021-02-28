@@ -5,9 +5,10 @@ import { Context } from "../context/PhotoContext";
 import { Feather } from "react-native-vector-icons";
 import Share from "react-native-share";
 import { getFileData } from "./../api/picsum";
-import { saveImage } from "./../utils/AppUtils";
+import { saveImage, isSwipeHintShown, setSwipeHint } from "./../utils/AppUtils";
 import Gallery from "react-native-image-gallery";
 import { useState } from "react";
+import Snackbar from "react-native-snackbar";
 
 // TODO remove unwanted packages
 
@@ -46,6 +47,13 @@ const PhotoDetailsScreen = ({ navigation }) => {
 
   useEffect(() => {
     initGallery(incomingIndex);
+    showSnackBar();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      Snackbar.dismiss();
+    };
   }, []);
 
   const showGalleryIndex = () => {
@@ -58,9 +66,25 @@ const PhotoDetailsScreen = ({ navigation }) => {
     );
   };
 
+  const showSnackBar = async () => {
+    const result = await isSwipeHintShown();
+    if (result) return;
+    Snackbar.show({
+      text: "You can swipe left or right to explore more photos",
+      duration: Snackbar.LENGTH_INDEFINITE,
+      action: {
+        text: "OK",
+        textColor: "green",
+        onPress: async () => {
+          console.log("Showing snackbar");
+          setSwipeHint(true);
+        },
+      },
+    });
+  };
+
   const onPageSelected = (index) => {
     item = photoList[index];
-    console.log("Index: ", item);
   };
 
   if (photoList.length <= 0) return null;
