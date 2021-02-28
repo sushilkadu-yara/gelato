@@ -41,6 +41,7 @@ const fetchPhotoList = (dispatch) => {
         return {
           id: item.id,
           uri: item.download_url,
+          author: item.author,
           dimensions: { width: item.width, height: item.height },
         };
       });

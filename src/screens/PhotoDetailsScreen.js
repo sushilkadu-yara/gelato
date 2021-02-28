@@ -16,13 +16,14 @@ import GallerySwiper from "react-native-gallery-swiper";
 
 let item;
 
-const SWIPE_COUNT_THRESHOLD = 25;
+const SWIPE_COUNT_THRESHOLD = 10;
 
 const PhotoDetailsScreen = ({ navigation }) => {
   const incomingIndex = navigation.getParam("index");
   const { state } = useContext(Context);
-
   const [photoList, setPhotoList] = useState([]);
+
+  const [currentAuthor, setCurrentAuthor] = useState("");
 
   const [currentIndex, setCurrentIndex] = useState(
     incomingIndex > SWIPE_COUNT_THRESHOLD
@@ -57,13 +58,11 @@ const PhotoDetailsScreen = ({ navigation }) => {
   }, []);
 
   const showGalleryIndex = () => {
-    return (
+    return currentAuthor ? (
       <View style={styles.pageCounterContainerStyle}>
-        <Text style={styles.pageCounterTextStyle}>
-          {currentIndex + 1} / {state.photoList.length}
-        </Text>
+        <Text style={styles.pageCounterTextStyle}>{currentAuthor}</Text>
       </View>
-    );
+    ) : null;
   };
 
   const showSnackBar = async () => {
@@ -85,6 +84,7 @@ const PhotoDetailsScreen = ({ navigation }) => {
 
   const onPageSelected = (index) => {
     item = photoList[index];
+    setCurrentAuthor(item.author);
   };
 
   if (photoList.length <= 0) return null;
@@ -98,10 +98,8 @@ const PhotoDetailsScreen = ({ navigation }) => {
         initialNumToRender={photoList.length}
         onPageSelected={onPageSelected}
         sensitiveScroll={false}
-        onEndReachedThreshold={0.8}
-        onEndReached={() => console.log("onEndReached: ", currentIndex)}
       />
-      {/* {showGalleryIndex()} */}
+      {showGalleryIndex()}
     </View>
   );
 };
@@ -137,6 +135,7 @@ PhotoDetailsScreen.navigationOptions = (props) => {
         </TouchableOpacity>
       </View>
     ),
+    title: "Photo Details",
   };
 };
 

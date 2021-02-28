@@ -13,7 +13,7 @@ const navigator = createStackNavigator(
   {
     initialRouteName: "PhotoList",
     defaultNavigationOptions: {
-      title: "Photo List",
+      title: "Lorem Picsum",
     },
   }
 );
