@@ -7,6 +7,7 @@ import Share from "react-native-share";
 import { getFileData } from "./../api/picsum";
 import { saveImage } from "./../utils/AppUtils";
 import Gallery from "react-native-image-gallery";
+import { useState } from "react";
 
 let item;
 
@@ -14,18 +15,34 @@ const PhotoDetailsScreen = ({ navigation }) => {
   item = navigation.getParam("item");
 
   const { state } = useContext(Context);
-  const index = state.indexOf(item);
+
+  const [currentIndex, setCurrentIndex] = useState(state.indexOf(item));
+
+  const showGalleryIndex = () => {
+    return (
+      <View style={styles.pageCounterContainerStyle}>
+        <Text style={styles.pageCounterTextStyle}>
+          {currentIndex + 1} / {state.length}
+        </Text>
+      </View>
+    );
+  };
+
+  const onPageSelected = (index) => {
+    item = state[index];
+    setCurrentIndex(index);
+  };
 
   return (
-    <Gallery
-      style={{ flex: 1, backgroundColor: "black" }}
-      images={state}
-      initialPage={index}
-      onPageSelected={(event) => {
-        item = state[event];
-        console.log("Selected page: ", event);
-      }}
-    />
+    <View style={{ flex: 1 }}>
+      <Gallery
+        style={{ flex: 1, backgroundColor: "black" }}
+        images={state}
+        initialPage={currentIndex}
+        onPageSelected={onPageSelected}
+      />
+      {showGalleryIndex()}
+    </View>
   );
 };
 
@@ -85,6 +102,23 @@ const styles = StyleSheet.create({
   saveIconStyle: {
     paddingRight: 10,
     alignSelf: "center",
+  },
+
+  pageCounterContainerStyle: {
+    top: 0,
+    height: 65,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+    width: "100%",
+    position: "absolute",
+    justifyContent: "center",
+  },
+
+  pageCounterTextStyle: {
+    textAlign: "right",
+    color: "white",
+    fontSize: 15,
+    fontStyle: "italic",
+    paddingRight: "10%",
   },
 });
 
