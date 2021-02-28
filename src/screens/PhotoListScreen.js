@@ -8,7 +8,7 @@ const PhotoListScreen = ({ navigation }) => {
   const [photoListApi] = usePhotoListResponse();
 
   const onItemClicked = (item) => {
-    navigation.navigate("PhotoDetails", { item });
+    navigation.navigate("PhotoDetails", { index: state.photoList.indexOf(item) });
   };
 
   const { state } = useContext(Context);

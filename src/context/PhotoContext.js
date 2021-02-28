@@ -30,7 +30,6 @@ const fetchPhotoList = (dispatch) => {
   return async (page, limit = RESPONSE_LIMIT) => {
     dispatch({ type: "PHOTO_LIST_LOADING" });
     try {
-      console.log("before making a request");
       const response = await picsum.get("/list", {
         params: {
           page: page,

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { ViewPager } from "react-native-viewpager-carousel";
 import { Context } from "../context/PhotoContext";
@@ -15,14 +15,38 @@ import GallerySwiper from "react-native-gallery-swiper";
 
 let item;
 
-const PhotoDetailsScreen = ({ navigation }) => {
-  item = navigation.getParam("item");
+const SWIPE_COUNT_THRESHOLD = 15;
 
+const PhotoDetailsScreen = ({ navigation }) => {
+  const incomingIndex = navigation.getParam("index");
   const { state } = useContext(Context);
 
+  const [photoList, setPhotoList] = useState([]);
+
   const [currentIndex, setCurrentIndex] = useState(
-    state.photoList.indexOf(item)
+    incomingIndex > SWIPE_COUNT_THRESHOLD
+      ? SWIPE_COUNT_THRESHOLD
+      : incomingIndex
   );
+
+  const initGallery = (pivot) => {
+    let leftEnd = 0;
+    if (pivot - SWIPE_COUNT_THRESHOLD > 0) {
+      leftEnd = pivot - SWIPE_COUNT_THRESHOLD;
+    }
+
+    let rightEnd = pivot + SWIPE_COUNT_THRESHOLD;
+    if (rightEnd > state.photoList.length) {
+      rightEnd = state.photoList.length - 1;
+    }
+
+    const updatedList = state.photoList.slice(leftEnd, rightEnd);
+    setPhotoList(updatedList);
+  };
+
+  useEffect(() => {
+    initGallery(incomingIndex);
+  }, []);
 
   const showGalleryIndex = () => {
     return (
@@ -35,21 +59,25 @@ const PhotoDetailsScreen = ({ navigation }) => {
   };
 
   const onPageSelected = (index) => {
-    item = state.photoList[index];
-    setCurrentIndex(index);
+    console.log("onPageSelected: ", index);
+    item = photoList[index];
   };
+
+  if (photoList.length <= 0) return null;
 
   return (
     <View style={{ flex: 1 }}>
       <GallerySwiper
         style={{ flex: 1, backgroundColor: "black" }}
-        images={state.photoList}
+        images={photoList}
         initialPage={currentIndex}
-        initialNumToRender={state.photoList.length}
+        initialNumToRender={photoList.length}
         onPageSelected={onPageSelected}
         sensitiveScroll={false}
+        onEndReachedThreshold={0.8}
+        onEndReached={() => console.log("onEndReached: ", currentIndex)}
       />
-      {showGalleryIndex()}
+      {/* {showGalleryIndex()} */}
     </View>
   );
 };

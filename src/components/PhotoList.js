@@ -49,10 +49,8 @@ const PhotoList = ({ photoList, onLoadNextPage, loading, onItemClicked }) => {
           return renderItem(item);
         }}
         numColumns={3}
-        onViewableItemsChanged={onViewRef.current}
-        viewabilityConfig={viewConfigRef.current}
+        onEndReachedThreshold={0.6}
         onEndReached={() => onLoadNextPage()}
-        
       />
     </View>
   );
