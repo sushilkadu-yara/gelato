@@ -33,34 +33,38 @@ Not putting requirements out in public since this is a code assignment.
 
 ## App overview
 
+#### App video
+
+<img src="./screenshots/app_overview.png" width="300">
+
 #### Home Screen
 
-<img src="./screenshots/screen_1.png" width="200">
+<img src="./screenshots/screen_1.png" width="300">
 
 #### Thumbnail loader
 
-<img src="./screenshots/screen_2.png" width="200">
+<img src="./screenshots/screen_2.png" width="300">
 
 #### Photo details
 
-<img src="./screenshots/screen_3.png" width="200">
+<img src="./screenshots/screen_3.png" width="300">
 
 #### Swipe gesture
 
-<img src="./screenshots/screen_4.png" width="200">
+<img src="./screenshots/screen_4.png" width="300">
 
 #### Pinch to zoom
 
-<img src="./screenshots/screen_5.png" width="200">
+<img src="./screenshots/screen_5.png" width="300">
 
 #### Share picture on social media
 
-<img src="./screenshots/share.png" width="200">
+<img src="./screenshots/share.png" width="300">
 
 #### Permission dialog on saving picture
 
-<img src="./screenshots/permission.png" width="200">
+<img src="./screenshots/permission.png" width="300">
 
 #### Infinite scroll
 
-<img src="./screenshots/infinite_scrolling.png" width="200">
+<img src="./screenshots/infinite_scrolling.png" width="300">
