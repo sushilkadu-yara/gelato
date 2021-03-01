@@ -1,25 +1,22 @@
-import { useContext } from "react";
-import { useEffect } from "react";
-import { Context } from "../context/PhotoContext";
-
-let page = 1;
+import { useContext } from 'react'
+import { useEffect } from 'react'
+import { Context } from '../context/PhotoContext'
 
 export default () => {
-  const { state, fetchPhotoList } = useContext(Context);
+  const { state, fetchPhotoList } = useContext(Context)
 
   const photoListApi = async () => {
-    if (state.loading) return;
+    if (state.loading) return
     try {
-      await fetchPhotoList(page);
-      page++;
+      await fetchPhotoList(state.page + 1)
     } catch (err) {
-      console.log("Error loading photos: ", err);
+      console.log('Error loading photos: ', err)
     }
-  };
+  }
 
   useEffect(() => {
-    photoListApi();
-  }, []);
+    photoListApi()
+  }, [])
 
-  return [photoListApi];
-};
+  return [photoListApi]
+}
