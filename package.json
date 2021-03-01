@@ -6,7 +6,7 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "lint": "eslint src/ --ignore-pattern node_modules/ --ignore-pattern shim.js",
-    "App": "cd android && ./gradlew clean && ./gradlew bundleReleaseJsAndAssets && ./gradlew assembleRelease -x bundleReleaseJsAndAssets",
+    "android:build:apk": "cd android && ./gradlew clean && ./gradlew bundleReleaseJsAndAssets && ./gradlew assembleRelease -x bundleReleaseJsAndAssets",
     "prettier": "prettier 'src/**/*.js'"
   },
   "dependencies": {

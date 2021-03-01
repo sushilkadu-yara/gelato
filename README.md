@@ -21,6 +21,12 @@ Not putting requirements out in public since this is a code assignment.
 
   - run `yarn ios`
 
-  ## Lint status
+- Other commands
+  - For lint run `yarn lint`
+  - For creating android release build run `yarn android:build:apk`
 
-  ![](./screenshots/lint_status.png)
+## Lint status
+
+    3 warnings and 1 error.
+
+![](./screenshots/lint_status.png)
