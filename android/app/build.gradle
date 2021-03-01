@@ -131,6 +131,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
+    }
+
     defaultConfig {
         applicationId 'com.app.gelato'
         minSdkVersion rootProject.ext.minSdkVersion
