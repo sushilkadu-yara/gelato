@@ -1,14 +1,13 @@
 import React, { useContext, useEffect } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
-import { ViewPager } from 'react-native-viewpager-carousel'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { Context } from '../context/PhotoContext'
 import { Feather } from 'react-native-vector-icons'
 import Share from 'react-native-share'
 import { getFileData } from './../api/picsum'
 import { saveImage, isSwipeHintShown, setSwipeHint } from './../utils/AppUtils'
-import Gallery from 'react-native-image-gallery'
 import { useState } from 'react'
 import Snackbar from 'react-native-snackbar'
+import PropTypes from 'prop-types'
 
 // TODO remove unwanted packages
 
@@ -25,7 +24,7 @@ const PhotoDetailsScreen = ({ navigation }) => {
 
   const [currentAuthor, setCurrentAuthor] = useState('')
 
-  const [currentIndex, setCurrentIndex] = useState(
+  const [currentIndex] = useState(
     incomingIndex > SWIPE_COUNT_THRESHOLD
       ? SWIPE_COUNT_THRESHOLD
       : incomingIndex
@@ -112,7 +111,7 @@ const shareImage = async ({ navigation }) => {
       type: 'image/jpeg',
       url: data
     }
-    const shareResponse = await Share.open(options)
+    await Share.open(options)
   } catch (error) {
     console.log('Error while sharing an image: ', error)
   }
