@@ -30,3 +30,14 @@ Not putting requirements out in public since this is a code assignment.
     3 warnings and 1 error.
 
 ![](./screenshots/lint_status.png)
+
+## App overview
+
+![Home Screen](./screenshots/screen_1.png)
+![Thumbnail loader](./screenshots/screen_2.png)
+![Photo details](./screenshots/screen_3.png)
+![Swipe gesture](./screenshots/screen_4.png)
+![Pinch to zoom](./screenshots/screen_5.png)
+![Share picture on social media](./screenshots/share.png)
+![Permission dialog on saving picture](./screenshots/permission.png)
+![Infinite scroll](./screenshots/infinite_scrolling.png)
