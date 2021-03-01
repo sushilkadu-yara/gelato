@@ -5,6 +5,7 @@ import PhotoList from './../components/PhotoList'
 import { Context } from '../context/PhotoContext'
 
 import GalleryShimmering from '../components/GalleryShimmering'
+import { useEffect } from 'react'
 
 const PhotoListScreen = ({ navigation }) => {
   const [photoListApi] = usePhotoListResponse()
@@ -15,7 +16,15 @@ const PhotoListScreen = ({ navigation }) => {
     })
   }
 
-  const { state } = useContext(Context)
+  const { state, fetchPhotoList } = useContext(Context)
+
+  useEffect(() => {
+    const loadPhotos = async () => {
+      await fetchPhotoList(state.page + 1)
+    }
+
+    loadPhotos()
+  }, [])
 
   return (
     <View>
@@ -26,9 +35,7 @@ const PhotoListScreen = ({ navigation }) => {
 
       <PhotoList
         photoList={state.photoList}
-        onLoadNextPage={() => {
-          photoListApi()
-        }}
+        onLoadNextPage={photoListApi}
         loading={state.loading}
         onItemClicked={onItemClicked}
       />

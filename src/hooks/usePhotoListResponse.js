@@ -14,9 +14,9 @@ export default () => {
     }
   }
 
-  useEffect(() => {
-    photoListApi()
-  }, [])
+  // useEffect(() => {
+  //   photoListApi()
+  // }, [])
 
   return [photoListApi]
 }

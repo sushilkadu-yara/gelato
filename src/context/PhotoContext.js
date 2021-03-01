@@ -9,14 +9,16 @@ const photoReducer = (state, action) => {
       return {
         loading: true,
         photoList: [...state.photoList],
-        page: state.page
+        page: state.page,
+        error: ''
       }
 
     case 'PHOTO_LIST_LOADED':
       return {
         loading: false,
         photoList: [...state.photoList, ...action.payload.result],
-        page: action.payload.page
+        page: action.payload.page,
+        error: ''
       }
 
     case 'PHOTO_LIST_FETCH_ERROR':
@@ -58,8 +60,6 @@ const fetchPhotoList = (dispatch) => {
         type: 'PHOTO_LIST_FETCH_ERROR',
         payload: 'Error fetching photos'
       })
-
-      throw new Error('Error fetching photos')
     }
   }
 }
