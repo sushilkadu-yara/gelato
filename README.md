@@ -33,11 +33,17 @@ Not putting requirements out in public since this is a code assignment.
 
 ## App overview
 
-`![Home Screen](./screenshots/screen_1.png | width=200)`
-`![Thumbnail loader](./screenshots/screen_2.png | width=200)`
-`![Photo details](./screenshots/screen_3.png | width=200)`
-`![Swipe gesture](./screenshots/screen_4.png | width=200)`
-`![Pinch to zoom](./screenshots/screen_5.png | width=200)`
-`![Share picture on social media](./screenshots/share.png | width=200)`
-`![Permission dialog on saving picture](./screenshots/permission.png | width=200)`
-`![Infinite scroll](./screenshots/infinite_scrolling.png | width=200)`
+#### Home Screen
+
+<img src="./screenshots/screen_1.png" width="48">
+
+#### Thumbnail loader
+
+<img src="./screenshots/screen_2.png" width="48">
+
+![Photo details](./screenshots/screen_3.png)
+![Swipe gesture](./screenshots/screen_4.png)
+![Pinch to zoom](./screenshots/screen_5.png)
+![Share picture on social media](./screenshots/share.png)
+![Permission dialog on saving picture](./screenshots/permission.png)
+![Infinite scroll](./screenshots/infinite_scrolling.png)
