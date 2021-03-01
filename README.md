@@ -23,4 +23,4 @@ Not putting requirements out in public since this is a code assignment.
 
   ## Lint status
 
-  !(./screenshots/lint_status.png)
+  ![](./screenshots/lint_status.png)
