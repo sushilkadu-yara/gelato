@@ -29,33 +29,19 @@ const saveImage = async (imageUrl) => {
 
   if (Platform.OS == 'android') {
     try {
-      const response = await RNFetchBlob.config({
+      await RNFetchBlob.config({
         fileCache: true,
         appendExt: 'jpeg',
         indicator: true,
         IOSBackgroundTask: true,
         path: path,
         addAndroidDownloads: {
-          useDownloadManager: false,
+          useDownloadManager: true,
           notification: true,
           path: path,
           description: 'Image'
         }
       }).fetch('GET', imageUrl)
-      //   //   await CameraRoll.saveToCameraRoll(imageUrl);
-
-      //   const storeLocation = `${RNFS.PicturesDirectoryPath}/galeto`;
-      //   let pathName = new Date().getTime() + ".jpeg";
-      //   let downloadDest = `${storeLocation}/${pathName}`;
-      //   const ret = await RNFS.downloadFile({
-      //     fromUrl: imageUrl,
-      //     toFile: downloadDest,
-      //   });
-      //   const res = await ret.promise;
-      //   console.log("RES: ", res);
-      //   if (res && res.statusCode === 200) {
-      //     await CameraRoll.saveToCameraRoll("file://" + downloadDest);
-      //   }
     } catch (error) {
       console.log('Error saving image: ', error)
     }

@@ -7,9 +7,6 @@ import { getFileData } from './../api/picsum'
 import { saveImage, isSwipeHintShown, setSwipeHint } from './../utils/AppUtils'
 import { useState } from 'react'
 import Snackbar from 'react-native-snackbar'
-import PropTypes from 'prop-types'
-
-// TODO remove unwanted packages
 
 import GallerySwiper from 'react-native-gallery-swiper'
 
@@ -104,7 +101,7 @@ const PhotoDetailsScreen = ({ navigation }) => {
   )
 }
 
-const shareImage = async ({ navigation }) => {
+const shareImage = async () => {
   try {
     const data = await getFileData(item.uri)
     const options = {
@@ -117,7 +114,7 @@ const shareImage = async ({ navigation }) => {
   }
 }
 
-PhotoDetailsScreen.navigationOptions = (props) => {
+PhotoDetailsScreen.navigationOptions = () => {
   return {
     headerRight: () => (
       <View style={styles.iconContainer}>
@@ -129,7 +126,7 @@ PhotoDetailsScreen.navigationOptions = (props) => {
           <Feather name="save" size={30} style={styles.saveIconStyle} />
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => shareImage(props)}>
+        <TouchableOpacity onPress={() => shareImage()}>
           <Feather name="share-2" size={30} style={styles.saveIconStyle} />
         </TouchableOpacity>
       </View>
