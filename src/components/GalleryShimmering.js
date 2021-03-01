@@ -1,7 +1,7 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import LinearGradient from "react-native-linear-gradient";
-import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
 const GalleryShimmering = () => {
   return (
@@ -149,20 +149,20 @@ const GalleryShimmering = () => {
         />
       </View>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
-    flexDirection: "column",
+    flexDirection: 'column'
   },
   innerContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     width: 135,
     height: 100,
-    marginTop: 10,
-  },
-});
+    marginTop: 10
+  }
+})
 
-export default GalleryShimmering;
+export default GalleryShimmering
