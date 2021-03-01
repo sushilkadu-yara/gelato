@@ -1,20 +1,14 @@
 import React from 'react'
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity
-} from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import ImageItem from './ImageItem'
+import PropTypes from 'prop-types'
 
-const ITEM_VISIBILITY_THRESHOLD = 25
-
-const PhotoList = ({ photoList, onLoadNextPage, loading, onItemClicked }) => {
-  const onViewRef = React.useRef(({ changed }) => {
-    const { index } = changed[changed.length - 1]
-  })
-  const viewConfigRef = React.useRef({ itemVisiblePercentThreshold: 80 })
+const PhotoList = ({ photoList, onLoadNextPage, onItemClicked }) => {
+  // TODO remove unwanted code
+  // const onViewRef = React.useRef(({ changed }) => {
+  //   const { index } = changed[changed.length - 1]
+  // })
+  // const viewConfigRef = React.useRef({ itemVisiblePercentThreshold: 80 })
 
   /**
    * Function to render individual item
@@ -50,6 +44,18 @@ const PhotoList = ({ photoList, onLoadNextPage, loading, onItemClicked }) => {
       />
     </View>
   )
+}
+
+PhotoList.propTypes = {
+  photoList: PropTypes.array,
+  onLoadNextPage: PropTypes.func,
+  onItemClicked: PropTypes.func
+}
+
+PhotoList.defaultProps = {
+  photoList: [],
+  onLoadNextPage: () => {},
+  onItemClicked: () => {}
 }
 
 const styles = StyleSheet.create({
