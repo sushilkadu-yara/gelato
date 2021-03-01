@@ -68,6 +68,8 @@ const PhotoDetailsScreen = ({ navigation }) => {
   const showSnackBar = async () => {
     const result = await isSwipeHintShown();
     if (result) return;
+
+    // TODO I18 support
     Snackbar.show({
       text: "You can swipe left or right to explore more photos",
       duration: Snackbar.LENGTH_INDEFINITE,
@@ -75,7 +77,6 @@ const PhotoDetailsScreen = ({ navigation }) => {
         text: "OK",
         textColor: "green",
         onPress: async () => {
-          console.log("Showing snackbar");
           setSwipeHint(true);
         },
       },

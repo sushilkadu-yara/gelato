@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, TouchableHighlight } from "react-native";
+import { View, StyleSheet } from "react-native";
 import ImageLoad from "react-native-image-placeholder";
 
 const ImageItem = ({ id, source, imageStyle }) => {

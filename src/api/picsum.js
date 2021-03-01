@@ -19,4 +19,6 @@ const getFileData = async (url) => {
   ).toString("base64")}`;
 };
 
+
+
 export { getFileData };

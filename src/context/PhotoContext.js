@@ -6,12 +6,17 @@ const RESPONSE_LIMIT = 50;
 const photoReducer = (state, action) => {
   switch (action.type) {
     case "PHOTO_LIST_LOADING":
-      return { loading: true, photoList: [...state.photoList] };
+      return {
+        loading: true,
+        photoList: [...state.photoList],
+        page: state.page,
+      };
 
     case "PHOTO_LIST_LOADED":
       return {
         loading: false,
-        photoList: [...state.photoList, ...action.payload],
+        photoList: [...state.photoList, ...action.payload.result],
+        page: action.payload.page,
       };
 
     case "PHOTO_LIST_FETCH_ERROR":
@@ -19,6 +24,7 @@ const photoReducer = (state, action) => {
         loading: false,
         photoList: [...state.photoList],
         error: action.payload,
+        page: state.page,
       };
 
     default:
@@ -33,7 +39,7 @@ const fetchPhotoList = (dispatch) => {
       const response = await picsum.get("/list", {
         params: {
           page: page,
-          limit: RESPONSE_LIMIT,
+          limit,
         },
       });
       // Map result for rendering
@@ -46,7 +52,7 @@ const fetchPhotoList = (dispatch) => {
         };
       });
 
-      dispatch({ type: "PHOTO_LIST_LOADED", payload: result });
+      dispatch({ type: "PHOTO_LIST_LOADED", payload: { result, page } });
     } catch (error) {
       dispatch({
         type: "PHOTO_LIST_FETCH_ERROR",
@@ -67,5 +73,5 @@ const updatePhotoList = (dispatch) => {
 export const { Context, Provider } = createDataContext(
   photoReducer,
   { fetchPhotoList, updatePhotoList },
-  { loading: false, photoList: [] }
+  { page: 0, loading: false, photoList: [] }
 );

@@ -4,10 +4,7 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  ActivityIndicator,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  TouchableHighlight,
 } from "react-native";
 import ImageItem from "./ImageItem";
 
