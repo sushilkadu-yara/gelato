@@ -16,14 +16,10 @@ const PhotoListScreen = ({ navigation }) => {
     })
   }
 
-  const { state, fetchPhotoList } = useContext(Context)
+  const { state } = useContext(Context)
 
   useEffect(() => {
-    const loadPhotos = async () => {
-      await fetchPhotoList(state.page + 1)
-    }
-
-    loadPhotos()
+    photoListApi()
   }, [])
 
   return (
