@@ -35,7 +35,7 @@ Not putting requirements out in public since this is a code assignment.
 
 #### App video
 
-<img src="./screenshots/app_overview.png" width="300">
+<img src="./screenshots/app_overview.gif" width="300">
 
 #### Home Screen
 
