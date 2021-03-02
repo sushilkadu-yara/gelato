@@ -45,6 +45,7 @@ const saveImage = async (imageUrl) => {
       }).fetch('GET', imageUrl)
     } catch (error) {
       console.log('Error saving image: ', error)
+      // TODO pass this back to UI layer
     }
   } else {
     await CameraRoll.saveToCameraRoll(imageUrl)
