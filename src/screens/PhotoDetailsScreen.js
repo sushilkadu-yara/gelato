@@ -134,8 +134,7 @@ PhotoDetailsScreen.navigationOptions = () => {
         </TouchableOpacity>
       </View>
     ),
-    headerRightContainerStyle: styles.iconContainer,
-    title: 'Photo Details'
+    headerTitle: 'Photo Details'
   }
 }
 
