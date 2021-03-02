@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { Context } from '../context/PhotoContext'
 import { Feather } from 'react-native-vector-icons'
 import Share from 'react-native-share'
@@ -7,8 +7,9 @@ import { getFileData } from './../api/picsum'
 import { saveImage, isSwipeHintShown, setSwipeHint } from './../utils/AppUtils'
 import { useState } from 'react'
 import Snackbar from 'react-native-snackbar'
-
 import GallerySwiper from 'react-native-gallery-swiper'
+
+import styles from './styles/PhotoDetailsScreenStyle'
 
 let item
 
@@ -101,6 +102,9 @@ const PhotoDetailsScreen = ({ navigation }) => {
   )
 }
 
+// LINT error fix
+// PhotoDetailsScreen.displayName = 'PhotoDetailsScreen'
+
 const shareImage = async () => {
   try {
     const data = await getFileData(item.uri)
@@ -125,56 +129,14 @@ PhotoDetailsScreen.navigationOptions = () => {
           }}>
           <Feather name="save" size={30} style={styles.saveIconStyle} />
         </TouchableOpacity>
-
         <TouchableOpacity onPress={() => shareImage()}>
           <Feather name="share-2" size={30} style={styles.saveIconStyle} />
         </TouchableOpacity>
       </View>
     ),
+    headerRightContainerStyle: styles.iconContainer,
     title: 'Photo Details'
   }
 }
-
-const styles = StyleSheet.create({
-  viewPagerStyle: {
-    flex: 1
-  },
-  container: {
-    flex: 1
-  },
-
-  imageStyle: {
-    flex: 1,
-    resizeMode: 'contain'
-  },
-
-  iconContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-
-  saveIconStyle: {
-    paddingRight: 10,
-    alignSelf: 'center'
-  },
-
-  pageCounterContainerStyle: {
-    top: 0,
-    height: 65,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    width: '100%',
-    position: 'absolute',
-    justifyContent: 'center'
-  },
-
-  pageCounterTextStyle: {
-    textAlign: 'right',
-    color: 'white',
-    fontSize: 15,
-    fontStyle: 'italic',
-    paddingRight: '10%'
-  }
-})
 
 export default PhotoDetailsScreen

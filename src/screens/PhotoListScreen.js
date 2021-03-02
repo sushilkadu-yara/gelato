@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react'
-import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
+import { View, Text, ActivityIndicator } from 'react-native'
 import usePhotoListResponse from './../hooks/usePhotoListResponse'
 import PhotoList from './../components/PhotoList'
 import { Context } from '../context/PhotoContext'
 import GalleryShimmering from '../components/GalleryShimmering'
+import styles from './styles/PhotoListScreenStyle'
 
 const PhotoListScreen = ({ navigation }) => {
   const [photoListApi] = usePhotoListResponse()
@@ -44,17 +45,5 @@ const PhotoListScreen = ({ navigation }) => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  loadingStyle: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-})
 
 export default PhotoListScreen
