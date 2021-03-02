@@ -2,6 +2,7 @@
 
 ## Features covered
 
+- Shimmering effect when photos are loading for the first time.
 - Infinite scroll on home screen
 - Photo details with swipe gesture
 - Share a photo

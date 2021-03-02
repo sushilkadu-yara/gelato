@@ -14,15 +14,15 @@
 I preferred Context api and hooks over Redux for creating this application.
 Here're my reasons.
 
-- Bundle side
+- Bundle side <br/>
   Redux is a 3rd party package and needs to be setup via npm or yarn. Most of the times
   Redux itself is not sufficient and you need to add middlewares. This increases overall
   bundle size. Context api and hooks are very much part of react api and no extra installation is needed.
 
-- Boilerplate code
+- Boilerplate code <br/>
   With Redux, we need to have an exhaustive setup, we need to build a store, and we need to dispatch actions. We then need to connect our store with our components. Sometimes, this is a pain for a developer. There is a high chance that one might get lost in the codes and just wander aimlessly with no clue on how to fix anything. Basically, you need to have a hands-on approach to work with Redux. According to me, Context APIs involve less boilerplate codes. With the introduction of React 16.6, we don’t even need the consumer. With just one line of code, you can get access to your context.
 
-- Handle async code
+- Handle async code <br/>
   In Context APIs, triggering an API (async codes) is relatively straightforward to use once you get the hang of it (especially when using Hooks). You also don’t need a package like redux-thunk or saga to handle asynchronous actions.
 
 ### Class component vs Functional components
@@ -43,4 +43,4 @@ I think, overall React community is moving towards functional component so that'
 
 ## Bugs in the existing system
 
-- When user tries to share an image, it takes 2-3 seconds to load share option. Reason being, image data needs to be downloaded before the images.
+- When user tries to share an image, it takes 2-3 seconds to load share option. Reason being, image data needs to be downloaded before the images. This can be improved by showing loader.
