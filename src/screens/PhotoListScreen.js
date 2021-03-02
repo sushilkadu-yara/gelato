@@ -23,8 +23,9 @@ const PhotoListScreen = ({ navigation }) => {
 
   return (
     <View>
-      <Text>Total photos loaded: {state.photoList.length}</Text>
-      {state.error ? <Text>{state.error}</Text> : null}
+      {state.error ? (
+        <Text style={styles.errorStyle}>{state.error}</Text>
+      ) : null}
 
       {state.photoList.length == 0 ? <GalleryShimmering /> : null}
 

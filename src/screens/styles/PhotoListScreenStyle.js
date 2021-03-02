@@ -9,5 +9,11 @@ export default StyleSheet.create({
     bottom: 0,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+
+  errorStyle: {
+    alignSelf: 'center',
+    color: '#FF0000',
+    fontSize: 20
   }
 })
