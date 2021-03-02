@@ -20,12 +20,12 @@ async function hasAndroidPermission() {
 const saveImage = async (imageUrl) => {
   if (!(await hasAndroidPermission())) return
 
-  const imageName = `/${Date.now()}.jpeg`
+  const imageName = `${Date.now()}.jpeg`
   const dirs = RNFetchBlob.fs.dirs
   const path =
     Platform.OS === 'ios'
-      ? dirs['MainBundleDir'] + imageName
-      : dirs.PictureDir + imageName
+      ? dirs['MainBundleDir'] + '/' + imageName
+      : dirs.PictureDir + '/' + imageName
 
   if (Platform.OS == 'android') {
     try {
@@ -36,6 +36,7 @@ const saveImage = async (imageUrl) => {
         IOSBackgroundTask: true,
         path: path,
         addAndroidDownloads: {
+          title: imageName,
           useDownloadManager: true,
           notification: true,
           path: path,
