@@ -1,7 +1,8 @@
 import createDataContext from './createDataContext'
 import picsum from './../api/picsum'
+import PageLimitReachedError from './../errors/PageLimitReachedError'
 
-const RESPONSE_LIMIT = 50
+const RESPONSE_LIMIT = 100
 
 const photoReducer = (state, action) => {
   switch (action.type) {
@@ -29,6 +30,13 @@ const photoReducer = (state, action) => {
         page: state.page
       }
 
+    case 'PHOTO_PAGE_LIMIT_REACHED':
+      return {
+        ...state,
+        loading: false,
+        error: ''
+      }
+
     default:
       return state
   }
@@ -44,6 +52,12 @@ const fetchPhotoList = (dispatch) => {
           limit
         }
       })
+
+      if (response.data && response.data.length === 0) {
+        // We need to error because then
+        throw new PageLimitReachedError('No more pages to load')
+      }
+
       // Map result for rendering
       const result = response.data.map((item) => {
         return {
@@ -56,6 +70,13 @@ const fetchPhotoList = (dispatch) => {
 
       dispatch({ type: 'PHOTO_LIST_LOADED', payload: { result, page } })
     } catch (error) {
+      if (error instanceof PageLimitReachedError) {
+        dispatch({
+          type: 'PHOTO_PAGE_LIMIT_REACHED'
+        })
+        return
+      }
+
       dispatch({
         type: 'PHOTO_LIST_FETCH_ERROR',
         payload: 'Error fetching photos'
