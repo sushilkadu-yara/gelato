@@ -2,10 +2,16 @@
 
 ## Current app design
 
+![](./../screenshots/app_design.png)
+
 ## Design decisons
 
-- Redux vs Context hooks
+- Redux vs Context api and hooks
 - Class component vs Functional components
+
+### Redux vs Context api and hooks
+
+### Class component vs Functional components
 
 ## Backend improvements
 
