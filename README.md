@@ -1,6 +1,11 @@
 # Gelato
 
-Not putting requirements out in public since this is a code assignment.
+## Features covered
+
+- Infinite scroll on home screen
+- Photo details with swipe gesture
+- Share a photo
+- Save a photo
 
 ## Installation instructions
 
