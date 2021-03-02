@@ -44,3 +44,9 @@ I think, overall React community is moving towards functional component so that'
 ## Bugs in the existing system
 
 - When user tries to share an image, it takes 2-3 seconds to load share option. Reason being, image data needs to be downloaded before the images. This can be improved by showing loader.
+
+## Challeges
+
+- I had faced one issue related to use of hooks. It was working fine in development but in release build it was giving invalid use of hooks error. Had to spend atleast 10 hours to get around this issue. Overall it was a good learning since I was using hooks for the very first time.
+- Image caching, previously I had used 2 packages for caching but both were not working with picsum because auth token that gets dynamically. I had spent good amount of time on this but I had to let this feature go because of timelines.
+  I wish to work on this further.
