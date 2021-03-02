@@ -32,11 +32,11 @@ I think, overall React community is moving towards functional component so that'
 
 ## Backend improvements
 
-- Thumbnail support
+- Thumbnail support <br/>
   The `/list` api provided by Picsum does not provide thumbnail support. In order efficiently
   render the home screen with thumbnails, backend should provide thumbnail url along with full image url. This will make sure home screen renders efficiently and also for rendering bigger images we can display thumbnail first and progressively render bigger images. This improves overall experience of the user.
 
-- Provide valid PNG/JPEG files for caching
+- Provide valid PNG/JPEG files for caching <br/>
   For caching of images I've tried 2 npm packages FastImage and imageHOC but both were not able to cache the images. Reason being, the url of the images can not be cached since auth token gets appended when image request is made. This makes it hard to use existing packages to cache the images.
   Image caching will improve the overall performance but due to limitations from API it's not straightforward to achieve it with npm available packages.
   More code needs to be written for image caching.
