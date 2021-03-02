@@ -2,7 +2,7 @@ import createDataContext from './createDataContext'
 import picsum from './../api/picsum'
 import PageLimitReachedError from './../errors/PageLimitReachedError'
 
-const RESPONSE_LIMIT = 100
+const RESPONSE_LIMIT = 50
 
 const photoReducer = (state, action) => {
   switch (action.type) {

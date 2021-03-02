@@ -4,12 +4,6 @@ import ImageItem from './ImageItem'
 import PropTypes from 'prop-types'
 
 const PhotoList = ({ photoList, onLoadNextPage, onItemClicked }) => {
-  // TODO remove unwanted code
-  // const onViewRef = React.useRef(({ changed }) => {
-  //   const { index } = changed[changed.length - 1]
-  // })
-  // const viewConfigRef = React.useRef({ itemVisiblePercentThreshold: 80 })
-
   /**
    * Function to render individual item
    * @param {Data to be rendered} item
