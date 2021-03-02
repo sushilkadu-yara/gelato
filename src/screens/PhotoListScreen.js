@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import usePhotoListResponse from './../hooks/usePhotoListResponse'
 import PhotoList from './../components/PhotoList'
 import { Context } from '../context/PhotoContext'
-
 import GalleryShimmering from '../components/GalleryShimmering'
-import { useEffect } from 'react'
 
 const PhotoListScreen = ({ navigation }) => {
   const [photoListApi] = usePhotoListResponse()

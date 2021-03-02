@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { useEffect } from 'react'
 import { Context } from '../context/PhotoContext'
 
 export default () => {
