@@ -33,9 +33,12 @@
 
 ## Lint status
 
-    3 warnings and 1 error.
+    2 warnings and 1 error.
 
 ![](./screenshots/lint_status.png)
+
+I spent some time on the error, but I wasn't able to figure out why this issue is coming.
+I need to spend more time to fix this.
 
 ## App overview
 
